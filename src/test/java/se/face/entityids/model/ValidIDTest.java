@@ -3,30 +3,23 @@
  */
 package se.face.entityids.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import se.face.entityids.exception.InvalidIdException;
+import se.face.entityids.test.TestImplementationClasses.ValidIDAllwaysValid;
+import se.face.entityids.test.TestImplementationClasses.ValidIDNeverValid;
 
 /**
- * @author Samuel
+ * @author samweisz
  *
  */
 public class ValidIDTest {
+
 	@Test
 	public void shouldValidateConstructorCall() throws InvalidIdException{
 		new ValidIDAllwaysValid("123");
-	}
-	
-	@Test
-	public void shouldValidateNewInstance(){
-		assertNotNull(ValidID.create("123", ValidIDAllwaysValid.class));
-	}
-	
-	@Test
-	public void shouldValidateIsValid(){
-		assertTrue(ValidID.isValid("123", ValidIDAllwaysValid.class));
 	}
 	
 	@Test(expected = InvalidIdException.class)
@@ -35,44 +28,7 @@ public class ValidIDTest {
 	}
 	
 	@Test
-	public void shouldNotValidateNewInstance(){
-		assertNull(ValidID.create("123", ValidIDNeverValid.class));
-	}
-	
-	@Test
-	public void shouldNotValidateIsValid(){
-		assertFalse(ValidID.isValid("123", ValidIDNeverValid.class));
-	}
-	
-	@Test
-	public void shouldNormalize(){
-		assertEquals("123", ValidID.create("12 3", ValidIDAllwaysValid.class).getNormalizedId());
-	}
-	
-	private static class ValidIDAllwaysValid extends ValidID{
-		public ValidIDAllwaysValid(String id) throws InvalidIdException {
-			super(id);
-		}
-		@Override
-		public void validate() throws InvalidIdException {
-			//Allways valid
-		}
-		@Override
-		public String getNormalizedId(){
-			return getOriginalId().replaceAll(" ", "");
-		}
-	}	
-	private static class ValidIDNeverValid extends ValidID{
-		public ValidIDNeverValid(String id) throws InvalidIdException {
-			super(id);
-		}
-		@Override
-		public void validate() throws InvalidIdException {
-			throw new InvalidIdException("Never valid");
-		}
-		@Override
-		public String getNormalizedId(){
-			return null;
-		}
+	public void shouldNormalize() throws InvalidIdException{
+		assertEquals("123", new ValidIDAllwaysValid("12 3").getNormalizedId());
 	}
 }

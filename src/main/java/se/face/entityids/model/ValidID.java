@@ -3,9 +3,6 @@
  */
 package se.face.entityids.model;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
 import se.face.entityids.exception.InvalidIdException;
 
 /**
@@ -17,6 +14,7 @@ import se.face.entityids.exception.InvalidIdException;
  */
 public abstract class ValidID {
 	private final String originalId;
+	private String normalizedId = null;
 	
 	protected ValidID(String id) throws InvalidIdException{
 		this.originalId = id;
@@ -25,6 +23,13 @@ public abstract class ValidID {
 	
 	public String getOriginalId() {
 		return originalId;
+	}
+	
+	public String getNormalizedId() {
+		if (normalizedId == null){
+			normalizedId = createNormalizedId();
+		}
+		return normalizedId;
 	}
 	
 	/**
@@ -36,47 +41,11 @@ public abstract class ValidID {
 	/**
 	 * Creates a normalized string representation of this string.
 	 */
-	public abstract String getNormalizedId();
-
-	/**
-	 * Creates a new id and returns null if it is invalid. Sometimes more
-	 * convenient to use than using a constructor that throws checked exception.
-	 * @param id
-	 * @return
-	 */
-	public static <T extends ValidID> T create(String id, Class<T> clazz){
-		try {
-			Constructor<T> constructor = clazz.getConstructor(String.class);
-			return constructor.newInstance(id);
-		} catch (InvocationTargetException e) {
-			if (e.getTargetException() instanceof InvalidIdException){
-				return null;
-			}
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e){
-			throw new RuntimeException("Contructor for: "+clazz.getCanonicalName()+" is not accessible", e);
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException("Found no suitable constructor for: "+clazz.getCanonicalName(), e);
-		} catch (InstantiationException e) {
-			throw new RuntimeException("validIdClass must be a non-abstract subclass of: "+ValidID.class.getCanonicalName(),
-					e);
-		} catch (Exception e) {
-			throw new RuntimeException("Unknown error", e);
-		}
-	}
-	
-	/**
-	 * Validating an id according to an id type.
-	 * The id is considered invalid if the constructor of validIdClass
-	 * throws an {@link InvalidIdException}, when used to construct an instance with id.
-	 */
-	public static boolean isValid(String id, Class<? extends ValidID> validIdClass){
-		return create(id, validIdClass) != null;
-	}
+	protected abstract String createNormalizedId();
 
 	@Override
 	public String toString() {
-		return "id=" + getNormalizedId();
+		return "id=" + normalizedId;
 	}
 
 	@Override
