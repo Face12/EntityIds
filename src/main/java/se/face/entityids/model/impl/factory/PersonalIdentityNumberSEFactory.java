@@ -11,7 +11,7 @@ import java.util.Date;
 
 import se.face.entityids.exception.InvalidIdException;
 import se.face.entityids.model.impl.PersonalIdentityNumberSE;
-import se.face.entityids.model.impl.enumtypes.PersonalIdentityNumberSEError;
+import se.face.entityids.model.impl.enumtypes.IdentityNumberError;
 
 /**
  * @author samweisz
@@ -60,18 +60,18 @@ public final class PersonalIdentityNumberSEFactory {
 					try {
 						dateFormat.parse(century+sixDigitDate);
 					} catch (ParseException e1) {
-						throw new InvalidIdException(PersonalIdentityNumberSEError.WRONG_DATE.getCode());
+						throw new InvalidIdException(IdentityNumberError.WRONG_DATE.getCode());
 					}
 				}
 				return new PersonalIdentityNumberSE(century+sixDigitDate+fourLast);
 			}
 			catch (NumberFormatException e){
-				throw new InvalidIdException(PersonalIdentityNumberSEError.WRONG_FORMAT.getCode());
+				throw new InvalidIdException(IdentityNumberError.WRONG_FORMAT.getCode());
 			}
 		}
 		else if (normalized.length() == 12){
 			return new PersonalIdentityNumberSE(id);
 		}
-		throw new InvalidIdException(PersonalIdentityNumberSEError.WRONG_FORMAT.getCode());
+		throw new InvalidIdException(IdentityNumberError.WRONG_FORMAT.getCode());
 	}
 }

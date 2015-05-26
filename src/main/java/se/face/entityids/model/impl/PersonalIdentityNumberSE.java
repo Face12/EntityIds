@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 import se.face.entityids.exception.InvalidIdException;
 import se.face.entityids.model.ValidID;
-import se.face.entityids.model.impl.enumtypes.PersonalIdentityNumberSEError;
+import se.face.entityids.model.impl.enumtypes.IdentityNumberError;
 import se.face.entityids.validation.Modul10;
 /**
  * Valid id class for swedish personal identity numbers
@@ -20,6 +20,7 @@ import se.face.entityids.validation.Modul10;
  *
  */
 public class PersonalIdentityNumberSE extends ValidID{	
+	private Date birthDate;
 	private static final Pattern validFormatPattern = 
 			Pattern.compile("^\\d{2}+\\d{6}+[- ]?+\\d{4}+$");
 
@@ -38,16 +39,16 @@ public class PersonalIdentityNumberSE extends ValidID{
 	protected void validate() throws InvalidIdException {
 		Matcher matcher = validFormatPattern.matcher(getOriginalId());
 		if (!matcher.find()){
-			throw new InvalidIdException(PersonalIdentityNumberSEError.WRONG_FORMAT.getCode());
+			throw new InvalidIdException(IdentityNumberError.WRONG_FORMAT.getCode());
 		}
 		final Date date = getBirthDate();
 		
 		if (date == null || date.after(new Date())){
-			throw new InvalidIdException(PersonalIdentityNumberSEError.WRONG_DATE.getCode());
+			throw new InvalidIdException(IdentityNumberError.WRONG_DATE.getCode());
 		}
 		
-		if (!Modul10.checkModul10(getBaseId())){
-			throw new InvalidIdException(PersonalIdentityNumberSEError.WRONG_CHECKDIGIT.getCode());
+		if (!Modul10.checkModul10(get10DigitId())){
+			throw new InvalidIdException(IdentityNumberError.WRONG_CHECKDIGIT.getCode());
 		}
 	}
 
@@ -62,7 +63,7 @@ public class PersonalIdentityNumberSE extends ValidID{
 	/**
 	 * The personal number without century and only numbers
 	 */
-	public String getBaseId() {
+	public String get10DigitId() {
 		return getNormalizedId().substring(2);
 	}
 	
@@ -78,6 +79,13 @@ public class PersonalIdentityNumberSE extends ValidID{
 	 * The birth date according to the personal number
 	 */
 	public Date getBirthDate(){
+		if (birthDate == null){
+			birthDate = parseBirthDate();
+		}
+		return birthDate;
+	}
+	
+	private Date parseBirthDate(){
 		final String dateString = getNormalizedId().substring(0, 8);
 		final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		dateFormat.setLenient(false);
