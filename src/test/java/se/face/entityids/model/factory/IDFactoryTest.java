@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import se.face.entityids.exception.IDConstructionError;
-import se.face.entityids.model.ValidID;
 import se.face.entityids.model.factory.IDFactory;
 import se.face.entityids.test.TestImplementationClasses.ValidIDAbstract;
 import se.face.entityids.test.TestImplementationClasses.ValidIDAllwaysValid;
