@@ -37,7 +37,7 @@ public final class PersonalIdentityNumberSEFactory {
 	 * The century will be assumed to be the current if applicable else last century will be used.
 	 * @param id
 	 * @return
-	 * @throws InvalidIdException
+	 * @throws InvalidIdException if the id is not valid even after century guess
 	 */
 	public static PersonalIdentityNumberSE createWithIdCenturyGuess(String id) throws InvalidIdException{
 		Calendar now = Calendar.getInstance();
