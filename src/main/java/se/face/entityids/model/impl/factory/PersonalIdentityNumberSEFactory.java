@@ -44,30 +44,28 @@ public final class PersonalIdentityNumberSEFactory {
 		final int currentCentury = Calendar.getInstance().get(Calendar.YEAR)/100;
 		final String normalized = PersonalIdentityNumberSE.normalize(id);
 		if (normalized.length() == 10){
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+			dateFormat.setLenient(false);
+			final String sixDigitDate = normalized.substring(0, 6);
+			final String fourLast = normalized.substring(6);
+			int century=currentCentury;
 			try{
-				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-				dateFormat.setLenient(false);
-				final String sixDigitDate = normalized.substring(0, 6);
-				final String fourLast = normalized.substring(6);
-				int century=currentCentury;
-				try{
-					Date date = dateFormat.parse(century+sixDigitDate);
-					if (date.after(now.getTime())){
-						century = currentCentury-1;
-					}
-				} catch (ParseException e){
+				Date date = dateFormat.parse(century+sixDigitDate);
+				if (date.after(now.getTime())){
 					century = currentCentury-1;
-					try {
-						dateFormat.parse(century+sixDigitDate);
-					} catch (ParseException e1) {
-						throw new InvalidIdException(IdentityNumberError.WRONG_DATE.getCode());
-					}
 				}
-				return new PersonalIdentityNumberSE(century+sixDigitDate+fourLast);
+			} catch (ParseException e){
+				century = currentCentury-1;
+				try {
+					//This is possible, but extremely rare.
+					//Happens 29 Februari every 400 years, 
+					//e.g. year 2100 is not a leap year but year 2000 is.
+					dateFormat.parse(century+sixDigitDate); 
+				} catch (ParseException e1) {
+					throw new InvalidIdException(IdentityNumberError.WRONG_DATE.getCode());
+				}
 			}
-			catch (NumberFormatException e){
-				throw new InvalidIdException(IdentityNumberError.WRONG_FORMAT.getCode());
-			}
+			return new PersonalIdentityNumberSE(century+sixDigitDate+fourLast);
 		}
 		else if (normalized.length() == 12){
 			return new PersonalIdentityNumberSE(id);

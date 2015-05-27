@@ -37,6 +37,7 @@ public class CompanyRegistrationNumberTest {
 			try {
 				CompanyRegistrationNumberSE companyRegistrationNumberSE = new CompanyRegistrationNumberSE(id);
 				assertTrue(id+" should be a person", companyRegistrationNumberSE.isPersonalIdentityNumber());
+				assertNotNull(companyRegistrationNumberSE.getPersonalIdentityNumberSE());
 			} catch (InvalidIdException e) {
 				fail("\""+id+"\" should be a valid company registration number (personal identification number)");
 			}
@@ -76,4 +77,17 @@ public class CompanyRegistrationNumberTest {
 		assertEquals("555555-5555", validCompany.getFormattedWithDash());
 		assertEquals("19840514-0677", validPerson.getFormattedWithDash());
 	}
+	
+	@Test
+	public void shouldGet10DigitFormattedWithDash(){
+		assertEquals("555555-5555", validCompany.get10DigitFormattedWithDash());
+		assertEquals("840514-0677", validPerson.get10DigitFormattedWithDash());
+	}
+	
+	@Test
+	public void shouldNormalize(){
+		assertEquals("5555555555", validCompany.getNormalizedId());
+		assertEquals("198405140677", validPerson.getNormalizedId());
+	}
+	
 }

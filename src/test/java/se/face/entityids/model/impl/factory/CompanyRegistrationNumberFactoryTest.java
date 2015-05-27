@@ -22,6 +22,7 @@ public class CompanyRegistrationNumberFactoryTest {
 				TestDataArrays.PINSE_GUESSABLE_AND_VALID_NO_CENTURY_IDS_AND_EXPECTED_CENTURY){
 			try {
 				CompanyRegistrationNumberSEFactory.createWithIdCenturyGuess(idAndCentury[0]);
+				assertNotNull(CompanyRegistrationNumberSEFactory.tryCreateWithIdCenturyGuess(idAndCentury[0]));
 			} catch (InvalidIdException e) {
 				fail(idAndCentury[0]+" should be guessable");
 			}
@@ -37,6 +38,7 @@ public class CompanyRegistrationNumberFactoryTest {
 			)){
 			try {
 				CompanyRegistrationNumberSEFactory.createWithIdCenturyGuess(id);
+				assertNotNull(CompanyRegistrationNumberSEFactory.tryCreateWithIdCenturyGuess(id));
 			} catch (InvalidIdException e) {
 				fail(id+" should be a valid company registration number (no century guess needed)");
 			}
@@ -46,10 +48,11 @@ public class CompanyRegistrationNumberFactoryTest {
 	public void shouldBeInvalidWithGuess(){
 		for (String[] idAndReason: 
 			TestDataArrays.PINSE_INVALID_AFTER_GUESS_NO_CENTURY_IDS){
-			try {
+			try {				
 				CompanyRegistrationNumberSEFactory.createWithIdCenturyGuess(idAndReason[0]);
 				fail(idAndReason[0]+" should be invalid");
 			} catch (InvalidIdException e) {
+				assertNull(CompanyRegistrationNumberSEFactory.tryCreateWithIdCenturyGuess(idAndReason[0]));
 			}
 		}
 	}
@@ -65,6 +68,7 @@ public class CompanyRegistrationNumberFactoryTest {
 				CompanyRegistrationNumberSEFactory.createWithIdCenturyGuess(id);
 				fail(id+" should be invalid");
 			} catch (InvalidIdException e) {
+				assertNull(CompanyRegistrationNumberSEFactory.tryCreateWithIdCenturyGuess(id));
 			}
 		}
 	}
