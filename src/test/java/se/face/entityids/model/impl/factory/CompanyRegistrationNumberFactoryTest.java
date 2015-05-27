@@ -31,7 +31,10 @@ public class CompanyRegistrationNumberFactoryTest {
 	@Test
 	public void crnShouldBeValidNoGuessNeeded(){		
 		for (String id: 
-			TestDataArrays.CRNSE_NON_PERSON_VALID){
+			TestDataArrays.arrayConcat(
+					TestDataArrays.CRNSE_NON_PERSON_VALID,
+					TestDataArrays.PINSE_VALID_IDS
+			)){
 			try {
 				CompanyRegistrationNumberSEFactory.createWithIdCenturyGuess(id);
 			} catch (InvalidIdException e) {
