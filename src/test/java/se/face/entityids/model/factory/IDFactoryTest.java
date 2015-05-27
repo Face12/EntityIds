@@ -1,7 +1,7 @@
 /**
  * 
  */
-package se.face.entityids.factory;
+package se.face.entityids.model.factory;
 
 import static org.junit.Assert.*;
 
