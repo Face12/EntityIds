@@ -25,9 +25,9 @@ public class PersonalIdentityNumberSE extends ValidID{
 			Pattern.compile("^\\d{2}+\\d{6}+[- ]?+\\d{4}+$");
 
 	/**
-	 * Creates new PersonalIdentityNumbers that must conform with this pattern:
-	 * yyyyMMdd[ -]?nnnn
-	 * it must also have a valid check digit.
+	 * Creates a valid Swedish personal identity number that must conform with this pattern:<br>
+	 * yyyyMMdd[ -]?nnnk<br>
+	 * where yyyyMMdd is valid non-future date, n are numbers and k is a valid module 10 check number.
 	 * @param id
 	 * @throws InvalidIdException - If invalid. The error code will be one of {@link PersonalIdentityNumberSEError}
 	 */
@@ -73,6 +73,14 @@ public class PersonalIdentityNumberSE extends ValidID{
 	public String getFormattedWithDash(){
 		final String normalizedId = getNormalizedId();
 		return normalizedId.substring(0, 8)+"-"+normalizedId.substring(8);
+	}
+	
+	/**
+	 * The personal number in the form yyMMdd-nnnn
+	 */
+	public String get10DigitFormattedWithDash(){
+		final String normalizedId = getNormalizedId();
+		return normalizedId.substring(2, 8)+"-"+normalizedId.substring(8);
 	}
 	
 	/**

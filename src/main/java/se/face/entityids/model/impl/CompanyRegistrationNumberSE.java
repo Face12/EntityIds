@@ -21,6 +21,18 @@ public class CompanyRegistrationNumberSE extends ValidID {
 	private static final Pattern validFormatNonPersonOrgnr= 
 			Pattern.compile("^(16)?\\d{2}+[2-9]\\d{3}+[- ]?+\\d{4}+$");
 	
+	/**
+	 * Creates a valid Swedish company registration number.
+	 * The registration number must either be a valid {@link PersonalIdentityNumberSE} or
+	 * conform with the pattern:<br>
+	 * 
+	 * (16)?nn[2-9]nnn[- ]?nnnk<br>
+	 * 
+	 * where n are numbers and k is a valid module 10 check number.
+	 * 
+	 * @param id
+	 * @throws InvalidIdException
+	 */
 	public CompanyRegistrationNumberSE(String id) throws InvalidIdException {
 		super(id);
 	}
@@ -51,14 +63,28 @@ public class CompanyRegistrationNumberSE extends ValidID {
 	}
 	
 	/**
-	 * The company registration number in the form xxxxxx-nnnn
+	 * The company registration number in the form nnnnnn-nnnn
 	 * or yyyyMMdd-nnnn in case of a personal number.
 	 */
 	public String getFormattedWithDash(){
-		final String normalizedId = getNormalizedId();
 		if (isPersonalIdentityNumber()){
 			return personalIdentityNumberSE.getFormattedWithDash();
 		}
+		return getNonPersonFormattedWithDash();
+	}
+	
+	/**
+	 * The company registration number in the form nnnnnn-nnnn.
+	 */
+	public String get10DigitFormattedWithDash(){
+		if (isPersonalIdentityNumber()){
+			return personalIdentityNumberSE.get10DigitFormattedWithDash();
+		}
+		return getNonPersonFormattedWithDash();
+	}
+
+	private String getNonPersonFormattedWithDash() {
+		final String normalizedId = getNormalizedId();
 		return normalizedId.substring(0, 6)+"-"+normalizedId.substring(6);
 	}
 	

@@ -3,6 +3,8 @@
  */
 package se.face.entityids.test;
 
+import java.util.stream.Stream;
+
 /**
  * @author Samuel
  *
@@ -10,7 +12,7 @@ package se.face.entityids.test;
 public final class TestDataArrays {
 	private TestDataArrays(){}
 	
-
+	//***************************** Swedish personal identification numbers ******************************
 	public static final String[] PINSE_VALID_IDS =
 			new String[]{
 							"190001010107", 
@@ -50,6 +52,31 @@ public final class TestDataArrays {
 							"200101010206"
 						};
 	
+
+	public static final String[][] PINSE_GUESSABLE_AND_VALID_NO_CENTURY_IDS_AND_EXPECTED_CENTURY =
+			new String[][]{
+							{"0001010107",	"20"},
+							{"000101-0107",	"20"},
+							{"000101 0107", "20"},
+							{"200101 0103", "19"},
+							{"8405140677",  "19"},
+							{"840514-0677", "19"},
+							{"840514 0677", "19"},
+							{"8402290103",  "19"}//leap year
+						};
+	
+	public static final String[][] PINSE_INVALID_AFTER_GUESS_NO_CENTURY_IDS =
+			new String[][]{
+							{"8405320107",	"day is 32"},
+							{"8404310108",	"it's april and day is 30"},
+							{"8405140678", 	"wrong check digit"},
+							{"0101010206", 	"wrong check digit"},
+							{"DET12323010", "it contains letters"},
+							{"000101010", "it's too short"}
+						};
+	//*************************** Swedish personal identification numbers - END *****************************
+	
+	//******************************* Swedish company registration numbers **********************************
 	public static final String[] CRNSE_NON_PERSON_VALID = new String[]{
 			"5555555555",
 			"555555-5555",
@@ -63,4 +90,9 @@ public final class TestDataArrays {
 			"5555555556", 
 			"165555555556",
 	};
+	//***************************** Swedish company registration numbers - END *******************************
+	
+	public static String[] arrayConcat(String[]...arrays){
+		return Stream.of(arrays).flatMap(Stream::of).toArray(String[]::new);
+	}
 }
