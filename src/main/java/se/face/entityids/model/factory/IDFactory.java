@@ -6,6 +6,7 @@ package se.face.entityids.model.factory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import se.face.entityids.exception.IDConstructionError;
 import se.face.entityids.exception.InvalidIdException;
 import se.face.entityids.model.ValidID;
 
@@ -62,16 +63,14 @@ public final class IDFactory {
 			if (e.getTargetException() instanceof InvalidIdException){
 				throw (InvalidIdException) e.getTargetException();
 			}
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e){
-			throw new RuntimeException("Contructor for: "+clazz.getCanonicalName()+" is not accessible", e);
+			throw new IDConstructionError("Constructor threw exception", e.getTargetException());
 		} catch (NoSuchMethodException e) {
-			throw new RuntimeException("Found no suitable constructor for: "+clazz.getCanonicalName(), e);
+			throw new IDConstructionError("Found no suitable constructor for: "+clazz.getCanonicalName(), e);
 		} catch (InstantiationException e) {
-			throw new RuntimeException("validIdClass must be a non-abstract subclass of: "+ValidID.class.getCanonicalName(),
+			throw new IDConstructionError("validIdClass must be a non-abstract subclass of: "+ValidID.class.getCanonicalName(),
 					e);
 		} catch (Exception e) {
-			throw new RuntimeException("Unknown error", e);
+			throw new IDConstructionError("Unknown error", e);
 		}
 	}
 }
