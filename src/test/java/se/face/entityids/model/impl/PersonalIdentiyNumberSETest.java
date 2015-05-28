@@ -18,7 +18,7 @@ import se.face.entityids.test.TestDataArrays;
  *
  */
 public class PersonalIdentiyNumberSETest {
-	private PersonalIdentityNumberSE personalIdentityNumberSE = IDFactory.create("198405140677", PersonalIdentityNumberSE.class);
+	private PersonalIdentityNumberSE personalIdentityNumberSE = IDFactory.create("194301013787", PersonalIdentityNumberSE.class);
 	
 	@Test
 	public void shouldBeValid(){
@@ -54,19 +54,19 @@ public class PersonalIdentiyNumberSETest {
 		Date birthDate = personalIdentityNumberSE.getBirthDate();
 		Calendar birthDateCalendar = Calendar.getInstance();
 		birthDateCalendar.setTime(birthDate);
-		assertEquals(1984, birthDateCalendar.get(Calendar.YEAR));
-		assertEquals(4, birthDateCalendar.get(Calendar.MONTH));
-		assertEquals(14, birthDateCalendar.get(Calendar.DAY_OF_MONTH));
+		assertEquals(1943, birthDateCalendar.get(Calendar.YEAR));
+		assertEquals(0, birthDateCalendar.get(Calendar.MONTH));
+		assertEquals(1, birthDateCalendar.get(Calendar.DAY_OF_MONTH));
 	}
 	
 	@Test
 	public void shouldGet10Digit(){
-		assertEquals("8405140677", personalIdentityNumberSE.get10DigitId());
+		assertEquals("4301013787", personalIdentityNumberSE.get10DigitId());
 	}
 	
 	@Test
 	public void shouldGetFormattedWithDash(){
-		assertEquals("19840514-0677", personalIdentityNumberSE.getFormattedWithDash());
+		assertEquals("19430101-3787", personalIdentityNumberSE.getFormattedWithDash());
 	}
 	
 	private void testInvalid(String id, String reason, IdentityNumberError error) {
