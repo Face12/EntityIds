@@ -40,36 +40,35 @@ public final class PersonalIdentityNumberSEFactory {
 	 * @throws InvalidIdException if the id is not valid even after century guess
 	 */
 	public static PersonalIdentityNumberSE createWithIdCenturyGuess(String id) throws InvalidIdException{
-		Calendar now = Calendar.getInstance();
 		final int currentCentury = Calendar.getInstance().get(Calendar.YEAR)/100;
 		final String normalized = PersonalIdentityNumberSE.normalize(id);
 		if (normalized.length() == 10){
-			DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-			dateFormat.setLenient(false);
 			final String sixDigitDate = normalized.substring(0, 6);
 			final String fourLast = normalized.substring(6);
-			int century=currentCentury;
-			try{
-				Date date = dateFormat.parse(century+sixDigitDate);
-				if (date.after(now.getTime())){
-					century = currentCentury-1;
-				}
-			} catch (ParseException e){
-				century = currentCentury-1;
-				try {
-					//This is possible, but extremely rare.
-					//Happens 29 Februari every 400 years, 
-					//e.g. year 2100 is not a leap year but year 2000 is.
-					dateFormat.parse(century+sixDigitDate); 
-				} catch (ParseException e1) {
-					throw new InvalidIdException(IdentityNumberError.WRONG_DATE.getCode());
-				}
+			if (dateIsValidAndNonFuture(currentCentury, sixDigitDate)){
+				return new PersonalIdentityNumberSE(currentCentury+sixDigitDate+fourLast);
 			}
-			return new PersonalIdentityNumberSE(century+sixDigitDate+fourLast);
+			else if (dateIsValidAndNonFuture(currentCentury-1, sixDigitDate)){
+				return new PersonalIdentityNumberSE((currentCentury-1)+sixDigitDate+fourLast);
+			}
+			throw new InvalidIdException(IdentityNumberError.WRONG_DATE.getCode());
+			
 		}
 		else if (normalized.length() == 12){
 			return new PersonalIdentityNumberSE(id);
 		}
 		throw new InvalidIdException(IdentityNumberError.WRONG_FORMAT.getCode());
+	}
+
+	private static boolean dateIsValidAndNonFuture(final int century, final String sixDigitDate) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		dateFormat.setLenient(false);
+		Date now = new Date();
+		try{
+			Date date = dateFormat.parse(century+sixDigitDate);
+			return date.before(now);
+		} catch (ParseException e){
+			return false;
+		}
 	}
 }

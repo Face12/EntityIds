@@ -45,7 +45,7 @@ public abstract class ValidID {
 
 	@Override
 	public String toString() {
-		return "id=" + normalizedId;
+		return "id=" + getNormalizedId();
 	}
 
 	@Override
