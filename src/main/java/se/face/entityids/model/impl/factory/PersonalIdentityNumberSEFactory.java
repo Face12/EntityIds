@@ -34,7 +34,8 @@ public final class PersonalIdentityNumberSEFactory {
 	
 	/**
 	 * Creating a personal identity number from an id that may or may not contain a century.
-	 * The century will be assumed to be the current if applicable else last century will be used.
+	 * If it doesn't contain century, it will be assumed to be the current if applicable 
+	 * else the previous century will be used.
 	 * @param id
 	 * @return
 	 * @throws InvalidIdException if the id is not valid even after century guess
