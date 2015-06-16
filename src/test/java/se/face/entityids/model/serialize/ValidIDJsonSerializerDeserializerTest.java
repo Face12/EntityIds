@@ -19,7 +19,7 @@ import se.face.entityids.model.impl.PersonalIdentityNumberSE;
  * @author Samuel
  *
  */
-public class ValidIDJsonSerializerTest {
+public class ValidIDJsonSerializerDeserializerTest {
 	private static final String testPnr = "194301013787";
 	
 	@Test
