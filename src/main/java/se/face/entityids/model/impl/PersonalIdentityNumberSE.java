@@ -20,6 +20,9 @@ import se.face.entityids.validation.Modul10;
  *
  */
 public class PersonalIdentityNumberSE extends ValidID{	
+
+	private static final long serialVersionUID = -2246270699180062077L;
+
 	private Date birthDate;
 	private static final Pattern validFormatPattern = 
 			Pattern.compile("^\\d{2}+\\d{6}+[- ]?+\\d{4}+$");
@@ -27,7 +30,7 @@ public class PersonalIdentityNumberSE extends ValidID{
 	/**
 	 * Creates a valid Swedish personal identity number that must conform with this pattern:<br>
 	 * yyyyMMdd[ -]?nnnk<br>
-	 * where yyyyMMdd is valid non-future date, n are numbers and k is a valid module 10 check number.
+	 * where yyyyMMdd is a valid non-future date, n are numbers and k is a valid module 10 check number.
 	 * @param id
 	 * @throws InvalidIdException - If invalid. The error code will be one of {@link PersonalIdentityNumberSEError}
 	 */

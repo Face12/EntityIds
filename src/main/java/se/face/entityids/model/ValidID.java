@@ -3,6 +3,8 @@
  */
 package se.face.entityids.model;
 
+import java.io.Serializable;
+
 import se.face.entityids.exception.InvalidIdException;
 
 /**
@@ -12,7 +14,10 @@ import se.face.entityids.exception.InvalidIdException;
  * @author Samuel
  *
  */
-public abstract class ValidID {
+public abstract class ValidID implements Serializable{
+
+	private static final long serialVersionUID = 6838249368920884295L;
+	
 	private final String originalId;
 	private String normalizedId = null;
 	

@@ -16,6 +16,9 @@ import se.face.entityids.validation.Modul10;
  *
  */
 public class CompanyRegistrationNumberSE extends ValidID {
+
+	private static final long serialVersionUID = -2131631902038084290L;
+
 	private PersonalIdentityNumberSE personalIdentityNumberSE;	
 	
 	private static final Pattern validFormatNonPersonOrgnr= 
