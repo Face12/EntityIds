@@ -17,7 +17,7 @@ import se.face.entityids.test.TestImplementationClasses.ValidIDNoOnlyIdConstruct
 import se.face.entityids.test.TestImplementationClasses.ValidIDValidateThrowsRuntimeException;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class IDFactoryTest {

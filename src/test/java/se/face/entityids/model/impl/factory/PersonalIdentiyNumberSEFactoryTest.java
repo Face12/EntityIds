@@ -12,7 +12,7 @@ import se.face.entityids.model.impl.PersonalIdentityNumberSE;
 import se.face.entityids.test.TestDataArrays;
 
 /**
- * @author samweisz
+ * @author Samuel Edqvist
  *
  */
 public class PersonalIdentiyNumberSEFactoryTest {

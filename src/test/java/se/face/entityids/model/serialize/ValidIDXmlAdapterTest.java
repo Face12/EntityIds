@@ -25,7 +25,7 @@ import se.face.entityids.exception.InvalidIdException;
 import se.face.entityids.model.impl.PersonalIdentityNumberSE;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class ValidIDXmlAdapterTest {

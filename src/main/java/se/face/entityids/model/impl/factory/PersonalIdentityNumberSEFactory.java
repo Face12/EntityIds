@@ -14,7 +14,7 @@ import se.face.entityids.model.impl.PersonalIdentityNumberSE;
 import se.face.entityids.model.impl.enumtypes.IdentityNumberError;
 
 /**
- * @author samweisz
+ * @author Samuel Edqvist
  *
  */
 public final class PersonalIdentityNumberSEFactory {

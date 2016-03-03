@@ -11,7 +11,7 @@ import se.face.entityids.model.ValidID;
 import se.face.entityids.model.factory.IDFactory;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class ValidIDXmlAdapter extends XmlAdapter<ValidIDXmlAdapter.XmlValidID, ValidID>{

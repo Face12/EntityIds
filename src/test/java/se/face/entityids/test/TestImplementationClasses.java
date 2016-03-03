@@ -7,7 +7,7 @@ import se.face.entityids.exception.InvalidIdException;
 import se.face.entityids.model.ValidID;
 
 /**
- * @author samweisz
+ * @author Samuel Edqvist
  *
  */
 @SuppressWarnings("serial")

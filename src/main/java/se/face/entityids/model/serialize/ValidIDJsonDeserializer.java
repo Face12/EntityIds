@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class ValidIDJsonDeserializer extends JsonDeserializer<ValidID> {

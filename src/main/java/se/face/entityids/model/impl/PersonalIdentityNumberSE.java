@@ -16,7 +16,7 @@ import se.face.entityids.model.impl.enumtypes.IdentityNumberError;
 import se.face.entityids.validation.Modul10;
 /**
  * Valid id class for swedish personal identity numbers
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class PersonalIdentityNumberSE extends ValidID{	

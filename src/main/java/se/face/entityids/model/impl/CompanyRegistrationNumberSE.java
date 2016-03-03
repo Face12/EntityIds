@@ -12,7 +12,7 @@ import se.face.entityids.model.impl.enumtypes.IdentityNumberError;
 import se.face.entityids.validation.Modul10;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class CompanyRegistrationNumberSE extends ValidID {

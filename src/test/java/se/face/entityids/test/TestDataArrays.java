@@ -6,7 +6,7 @@ package se.face.entityids.test;
 import java.util.stream.Stream;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public final class TestDataArrays {

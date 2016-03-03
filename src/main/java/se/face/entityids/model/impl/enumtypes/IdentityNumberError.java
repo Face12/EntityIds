@@ -4,7 +4,7 @@
 package se.face.entityids.model.impl.enumtypes;
 
 /**
- * @author samweisz
+ * @author Samuel Edqvist
  *
  */
 public enum IdentityNumberError {

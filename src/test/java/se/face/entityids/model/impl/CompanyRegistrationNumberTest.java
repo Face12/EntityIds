@@ -13,7 +13,7 @@ import se.face.entityids.model.impl.enumtypes.IdentityNumberError;
 import se.face.entityids.test.TestDataArrays;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class CompanyRegistrationNumberTest {

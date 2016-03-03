@@ -4,7 +4,7 @@
 package se.face.entityids.exception;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class IDConstructionError extends RuntimeException {

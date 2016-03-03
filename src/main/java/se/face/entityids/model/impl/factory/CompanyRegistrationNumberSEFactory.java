@@ -7,7 +7,7 @@ import se.face.entityids.exception.InvalidIdException;
 import se.face.entityids.model.impl.CompanyRegistrationNumberSE;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public final class CompanyRegistrationNumberSEFactory {

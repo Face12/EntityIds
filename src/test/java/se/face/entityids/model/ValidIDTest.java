@@ -14,7 +14,7 @@ import se.face.entityids.test.TestImplementationClasses.ValidIDAllwaysValid;
 import se.face.entityids.test.TestImplementationClasses.ValidIDNeverValid;
 
 /**
- * @author samweisz
+ * @author Samuel Edqvist
  *
  */
 public class ValidIDTest {

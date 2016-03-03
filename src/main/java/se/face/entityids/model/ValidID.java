@@ -11,7 +11,7 @@ import se.face.entityids.exception.InvalidIdException;
  * Represents an id that has been validated. Note that an instance of this class
  * can never hold an invalid id value, since it will be validated, using the validate() method,
  * at construction.
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public abstract class ValidID implements Serializable{

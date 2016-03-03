@@ -4,7 +4,7 @@
 package se.face.entityids.validation;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public final class Modul10 {

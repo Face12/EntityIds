@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author Samuel
+ * @author Samuel Edqvist
  *
  */
 public class IdentityNumberErrorTest {
