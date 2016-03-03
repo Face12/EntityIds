@@ -10,6 +10,7 @@ import se.face.entityids.model.ValidID;
  * @author samweisz
  *
  */
+@SuppressWarnings("serial")
 public class TestImplementationClasses {
 	public static class ValidIDAllwaysValid extends ValidID{
 		public ValidIDAllwaysValid(String id) throws InvalidIdException {
