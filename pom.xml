@@ -5,6 +5,14 @@
 	<artifactId>entityids</artifactId>
 	<version>0.1-SNAPSHOT</version>
 
+	<developers>
+		<developer>
+			<name>Samuel Edqvist</name>
+			<email>Samuel.Edqvist@gmail.com</email>
+			<url>https://github.com/Face12</url>			
+		</developer>
+	</developers>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
