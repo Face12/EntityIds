@@ -32,6 +32,17 @@ public final class IDFactory {
 	}
 	
 	/**
+	 * Creates a new id, throws {@link InvalidIdException} if invalid. Like
+	 * a constructor call to clazz
+	 * @param id
+	 * @return
+	 */
+	public static <T extends ValidID> T createValidated(String id, Class<T> clazz) 
+			throws InvalidIdException{
+		return createInternal(id, clazz);
+	}
+	
+	/**
 	 * Validating an id according to an id type.
 	 * The id is considered invalid if the constructor of validIdClass
 	 * throws an {@link InvalidIdException}, when used to construct an instance with id.
